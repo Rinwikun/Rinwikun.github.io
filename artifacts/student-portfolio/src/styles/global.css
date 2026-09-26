@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-zinc-950 text-zinc-300 antialiased;
+  }
+
+  ::selection {
+    @apply bg-emerald-400 text-zinc-950;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-4 outline-emerald-400;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-mono text-xs font-medium uppercase tracking-[0.22em] text-emerald-400;
+  }
+
+  .prose-note {
+    @apply max-w-2xl text-lg leading-8 text-zinc-400;
+  }
+}

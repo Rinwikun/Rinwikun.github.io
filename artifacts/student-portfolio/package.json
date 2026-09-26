@@ -1,0 +1,21 @@
+{
+  "name": "@workspace/student-portfolio",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "ASTRO_DEV_BACKGROUND=1 astro dev --host 0.0.0.0 --port $PORT",
+    "build": "astro build",
+    "preview": "ASTRO_PREVIEW_BACKGROUND=1 astro preview --host 0.0.0.0 --port $PORT",
+    "typecheck": "astro check"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "@tailwindcss/vite": "catalog:",
+    "@types/aos": "^3.0.8",
+    "aos": "^2.3.4",
+    "astro": "latest",
+    "tailwindcss": "catalog:",
+    "typescript": "^5.9.3"
+  }
+}

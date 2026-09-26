@@ -1,0 +1,64 @@
+---
+import Footer from '../components/Footer.astro';
+import Navbar from '../components/Navbar.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'A student developer portfolio and learning log, documenting projects, experiments, and progress.',
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" class="bg-zinc-950">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title} · student developer</title>
+  </head>
+  <body class="min-h-screen bg-zinc-950 text-zinc-300">
+    <div class="relative flex min-h-screen flex-col overflow-hidden">
+      <div
+        class="pointer-events-none absolute -left-40 -top-40 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl"
+        aria-hidden="true"
+      ></div>
+      <Navbar />
+      <main
+        id="main-content"
+        class="relative mx-auto w-full max-w-6xl flex-1 px-6 pb-20 pt-14 sm:px-8 sm:pt-20 lg:px-10"
+      >
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>
+
+<script>
+  import AOS from 'aos';
+  import 'aos/dist/aos.css';
+
+  AOS.init({
+    duration: 650,
+    easing: 'ease-out-cubic',
+    once: true,
+    offset: 48,
+  });
+</script>

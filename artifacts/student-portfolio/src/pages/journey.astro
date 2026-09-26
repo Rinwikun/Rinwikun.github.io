@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const entries = [
+  {
+    date: 'September 2026',
+    title: 'When a “simple” layout refused to stay simple',
+    body: 'I learned that responsive design is less about adding breakpoints and more about deciding what information deserves space at every width.',
+    lesson: 'Design the hierarchy before writing the CSS.',
+  },
+  {
+    date: 'August 2026',
+    title: 'The bug was not in the button',
+    body: 'A form looked broken because its success state rendered below the fold. The fix was not another border or color—it was making the feedback impossible to miss.',
+    lesson: 'Debug the user’s experience, not only the console.',
+  },
+  {
+    date: 'July 2026',
+    title: 'First steps with static sites',
+    body: 'Astro made the idea of a multi-page site feel approachable. The smaller the runtime surface, the more I can focus on the content and the HTML.',
+    lesson: 'Choose the simplest tool that supports the idea.',
+  },
+];
+---
+
+<BaseLayout
+  title="Journey"
+  description="A learning log documenting progress, debugging lessons, and small wins."
+>
+  <header class="max-w-2xl" data-aos="fade-up">
+    <p class="eyebrow">learning log</p>
+    <h1 class="mt-5 text-5xl font-semibold tracking-tight text-zinc-100 sm:text-6xl">Notes from the messy middle.</h1>
+    <p class="prose-note mt-6">
+      Progress is easier to see when I leave a trail. These notes capture
+      questions, bug-fixing experiences, and the small ideas I want to carry
+      into the next project.
+    </p>
+  </header>
+
+  <div class="mt-16 max-w-3xl">
+    {
+      entries.map((entry, index) => (
+        <article
+          class="relative border-l border-zinc-800 pb-14 pl-8 last:pb-0 sm:pl-10"
+          data-aos="fade-up"
+          data-aos-delay={index * 100}
+        >
+          <span
+            class="absolute -left-[5px] top-1 h-2 w-2 rounded-full bg-emerald-400 ring-4 ring-zinc-950"
+            aria-hidden="true"
+          ></span>
+          <p class="font-mono text-xs uppercase tracking-[0.18em] text-indigo-400">{entry.date}</p>
+          <h2 class="mt-4 text-2xl font-semibold text-zinc-100">{entry.title}</h2>
+          <p class="mt-4 leading-8 text-zinc-400">{entry.body}</p>
+          <p class="mt-5 border-l-2 border-emerald-400/60 pl-4 text-sm font-medium leading-6 text-zinc-300">
+            <span class="text-emerald-400">Lesson:</span> {entry.lesson}
+          </p>
+          {index < entries.length - 1 && <div class="mt-12" aria-hidden="true"></div>}
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>

@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    type: 'school assignment',
+    title: 'Study planner',
+    description: 'A small planner for turning a noisy week of deadlines into a clear next step.',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    accent: 'emerald',
+  },
+  {
+    type: 'hobby project',
+    title: 'Book notes',
+    description: 'A quiet place to collect reading notes, questions, and quotes worth revisiting.',
+    tags: ['Astro', 'Markdown', 'Tailwind'],
+    accent: 'indigo',
+  },
+  {
+    type: 'experiment',
+    title: 'API weather station',
+    description: 'An experiment in loading states, error messages, and making external data feel human.',
+    tags: ['Fetch', 'TypeScript', 'UX'],
+    accent: 'emerald',
+  },
+];
+---
+
+<BaseLayout
+  title="Projects"
+  description="School assignments, hobby projects, and experiments from a student developer."
+>
+  <header class="max-w-2xl" data-aos="fade-up">
+    <p class="eyebrow">selected work</p>
+    <h1 class="mt-5 text-5xl font-semibold tracking-tight text-zinc-100 sm:text-6xl">Things I’ve made while learning.</h1>
+    <p class="prose-note mt-6">
+      Each project is a snapshot, not a final answer. I’m interested in what
+      the build taught me and what I’d try differently next time.
+    </p>
+  </header>
+
+  <div class="mt-16 grid gap-5 md:grid-cols-3">
+    {
+      projects.map((project, index) => (
+        <article
+          class="group flex min-h-80 flex-col rounded-lg border border-zinc-800 bg-zinc-900/50 p-6 transition-colors hover:border-zinc-700"
+          data-aos="fade-up"
+          data-aos-delay={index * 90}
+        >
+          <div class="flex items-center justify-between">
+            <span
+              class:list={[
+                'font-mono text-xs uppercase tracking-[0.18em]',
+                project.accent === 'emerald' ? 'text-emerald-400' : 'text-indigo-400',
+              ]}
+            >
+              {project.type}
+            </span>
+            <span class="font-mono text-xs text-zinc-600">0{index + 1}</span>
+          </div>
+          <h2 class="mt-10 text-2xl font-semibold text-zinc-100">{project.title}</h2>
+          <p class="mt-4 flex-1 leading-7 text-zinc-400">{project.description}</p>
+          <ul class="mt-7 flex flex-wrap gap-2" aria-label={`${project.title} technologies`}>
+            {project.tags.map((tag) => (
+              <li class="rounded-full border border-zinc-800 px-3 py-1 font-mono text-xs text-zinc-500">{tag}</li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+
+  <aside
+    class="mt-16 rounded-lg border border-dashed border-zinc-700 p-6 sm:p-8"
+    data-aos="fade-up"
+  >
+    <p class="eyebrow">project rule</p>
+    <p class="mt-4 max-w-2xl text-xl leading-8 text-zinc-300">
+      Keep the scope small enough to finish, but meaningful enough to teach
+      something new.
+    </p>
+  </aside>
+</BaseLayout>

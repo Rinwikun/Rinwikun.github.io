@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const tools = [
+  'Astro',
+  'TypeScript',
+  'JavaScript',
+  'Tailwind CSS',
+  'HTML',
+  'CSS',
+  'Git',
+  'Figma',
+];
+---
+
+<BaseLayout
+  title="About"
+  description="About a student developer learning through projects, experiments, and thoughtful iteration."
+>
+  <section class="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+    <div
+      class="flex flex-col items-center lg:items-start"
+      data-aos="fade-right"
+    >
+      <div
+        class="flex h-48 w-48 items-center justify-center rounded-full border border-emerald-400/40 bg-zinc-900 text-emerald-400 shadow-[0_0_0_10px_rgba(16,185,129,0.05)]"
+        aria-label="Profile picture placeholder"
+      >
+        <span class="font-mono text-5xl tracking-tighter" aria-hidden="true">
+          { }
+        </span>
+      </div>
+      <p class="mt-4 font-mono text-xs uppercase tracking-[0.18em] text-zinc-500">
+        profile.exe
+      </p>
+      <p class="mt-5 font-mono text-xs text-emerald-400">
+        status: always_learning
+      </p>
+    </div>
+
+    <div data-aos="fade-up">
+      <p class="eyebrow">about the developer</p>
+      <h1 class="mt-5 max-w-3xl text-5xl font-semibold tracking-tight text-zinc-100 sm:text-6xl">
+        Learning by building, breaking, and trying again.
+      </h1>
+      <div class="mt-7 max-w-2xl space-y-5 text-lg leading-8 text-zinc-400">
+        <p>
+          I’m a student developer learning in public through small projects,
+          school assignments, and experiments that answer one question at a time.
+        </p>
+        <p>
+          I care about understanding the decisions behind the interface—not
+          just making something work, but learning why it works and how to make
+          it clearer for the person using it.
+        </p>
+      </div>
+
+      <div class="mt-12 border-t border-zinc-800 pt-7" data-aos="fade-up">
+        <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p class="eyebrow">tech stack</p>
+            <h2 class="mt-3 text-2xl font-semibold text-zinc-100">
+              Tools I’m learning with.
+            </h2>
+          </div>
+          <p class="max-w-sm text-sm leading-7 text-zinc-500">
+            The stack changes as the questions get more interesting. These are
+            the tools currently in rotation.
+          </p>
+        </div>
+
+        <ul class="mt-7 flex max-w-2xl flex-wrap gap-3" aria-label="Technology stack">
+          {
+            tools.map((tool) => (
+              <li class="rounded-full border border-zinc-700 bg-zinc-900/60 px-4 py-2 font-mono text-xs text-zinc-300 transition-colors hover:border-emerald-400/60 hover:text-emerald-300">
+                {tool}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <aside
+    class="mt-24 rounded-lg border border-dashed border-zinc-700 p-6 sm:p-8"
+    data-aos="fade-up"
+  >
+    <p class="eyebrow">working principle</p>
+    <p class="mt-4 max-w-3xl text-xl leading-8 text-zinc-300">
+      Start small, pay attention to what breaks, and leave the code clearer
+      than you found it.
+    </p>
+  </aside>
+</BaseLayout>

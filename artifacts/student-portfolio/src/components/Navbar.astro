@@ -1,0 +1,52 @@
+---
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const hrefFor = (path: string) =>
+  path === '/' ? base : `${base}${path.replace(/^\/+/, '')}`;
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/journey', label: 'Journey' },
+];
+---
+
+<header class="border-b border-zinc-800/80">
+  <nav
+    class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5 sm:px-8 lg:px-10"
+    aria-label="Primary navigation"
+  >
+    <a
+      href={hrefFor('/')}
+      class="font-mono text-sm font-semibold tracking-tight text-zinc-100 transition-colors hover:text-emerald-400"
+      aria-label="Student developer home"
+    >
+      <span class="text-emerald-400">&lt;</span>dev.log<span class="text-emerald-400">/&gt;</span>
+    </a>
+
+    <div class="flex items-center gap-5 sm:gap-7">
+      {
+        links.map((link) => {
+          const isCurrent = currentPath === link.href;
+          return (
+            <a
+              href={hrefFor(link.href)}
+              class:list={[
+                'text-sm transition-colors',
+                isCurrent
+                  ? 'font-medium text-zinc-100'
+                  : 'text-zinc-500 hover:text-zinc-200',
+              ]}
+              aria-current={isCurrent ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          );
+        })
+      }
+    </div>
+  </nav>
+</header>
