@@ -3,32 +3,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const projects = [
   {
-    type: 'school assignment',
-    title: 'Study planner',
-    description: 'A small planner for turning a noisy week of deadlines into a clear next step.',
-    tags: ['HTML', 'CSS', 'JavaScript'],
+    type: 'personal project',
+    title: 'NoteAI Task Terminal',
+    description: 'A cross-platform desktop app that turns natural-language instructions into terminal actions — reading system info or generating file and folder structures — powered by a local Ollama model.',
+    tags: ['.NET 10', 'Avalonia UI', 'Ollama'],
     accent: 'emerald',
   },
   {
-    type: 'hobby project',
-    title: 'Book notes',
-    description: 'A quiet place to collect reading notes, questions, and quotes worth revisiting.',
-    tags: ['Astro', 'Markdown', 'Tailwind'],
+    type: 'personal project',
+    title: 'LauncherMB',
+    description: 'A custom Minecraft launcher with live 3D skin previews, automatic version detection, and one-click launching — no console window, no manual setup.',
+    tags: ['Electron', 'Node.js', 'skinview3d'],
     accent: 'indigo',
-  },
-  {
-    type: 'experiment',
-    title: 'API weather station',
-    description: 'An experiment in loading states, error messages, and making external data feel human.',
-    tags: ['Fetch', 'TypeScript', 'UX'],
-    accent: 'emerald',
   },
 ];
 ---
 
 <BaseLayout
   title="Projects"
-  description="School assignments, hobby projects, and experiments from a student developer."
+  description="Personal projects and experiments from Rinwikun."
 >
   <header class="max-w-2xl" data-aos="fade-up">
     <p class="eyebrow">selected work</p>
