@@ -21,7 +21,7 @@ const tools = [
 
 <BaseLayout
   title="About"
-  description="About a Rinwikun developer learning through projects, experiments, and thoughtful iteration."
+  description="About Rinwikun (Erwin Wijaya), learning through projects, experiments, and thoughtful iteration."
 >
   <section class="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
     <div
@@ -33,10 +33,12 @@ const tools = [
         aria-label="Profile picture placeholder"
       >
         <span class="font-mono text-5xl tracking-tighter" aria-hidden="true">
-          <Image 
-            src={profileImg} 
-            alt="Profile" 
-            class="w-48 h-48 aspect-square object-cover rounded-full border-2 border-gray-300" 
+          <img
+            src={profileImg.src}
+            alt="Profile"
+            width="192"
+            height="192"
+            class="w-48 h-48 aspect-square object-cover rounded-full border-2 border-gray-300"
           />
         </span>
       </div>
@@ -55,7 +57,7 @@ const tools = [
       </h1>
       <div class="mt-7 max-w-2xl space-y-5 text-lg leading-8 text-zinc-400">
         <p>
-          I’m a Rinwikun developer learning in public through small projects,
+          I'm Rinwikun (Erwin Wijaya), learning in public through small projects,
           school assignments, and experiments that answer one question at a time.
         </p>
         <p>
