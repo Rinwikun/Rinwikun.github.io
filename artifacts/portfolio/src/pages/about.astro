@@ -3,6 +3,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import profileImg from '../assets/profile.jpg';
 
+const socials = [
+          {
+            name: 'GitHub',
+            handle: 'Rinwikun',
+            url: 'https://github.com/Rinwikun',
+            viewBox: '0 0 16 16',
+            path: 'M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z',
+          },
+          {
+            name: 'YouTube',
+            handle: '',
+            url: 'https://www.youtube.com/',
+            viewBox: '0 0 16 16',
+            path: '',
+          },
+];
 const tools = [
   'Astro',
   'Electron',
@@ -17,6 +33,7 @@ const tools = [
   'CSS',
   'Git',
 ];
+
 ---
 
 <BaseLayout
@@ -24,14 +41,11 @@ const tools = [
   description="About Rinwikun (Erwin Wijaya), learning through projects, experiments, and thoughtful iteration."
 >
   <section class="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-    <div
-      class="flex flex-col items-center lg:items-start"
+    <div class="flex flex-col items-center lg:items-start"
       data-aos="fade-right"
     >
-      <div
-        class="flex h-48 w-48 items-center justify-center rounded-full border border-emerald-400/40 bg-zinc-900 text-emerald-400 shadow-[0_0_0_10px_rgba(16,185,129,0.05)]"
-        aria-label="Profile picture placeholder"
-      >
+      <div class="flex h-48 w-48 items-center justify-center rounded-full border border-emerald-400/40 bg-zinc-900 text-emerald-400 shadow-[0_0_0_10px_rgba(16,185,129,0.05)]"
+        aria-label="Profile picture placeholder">
         <span class="font-mono text-5xl tracking-tighter" aria-hidden="true">
           <img
             src={profileImg.src}
@@ -48,6 +62,26 @@ const tools = [
       <p class="mt-5 font-mono text-xs text-emerald-400">
         Status: Always Learning
       </p>
+      <ul class="mt-6 flex flex-col gap-3" aria-label="Social links">
+        {
+          socials.map((social) => (
+            <li>
+              <a
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${social.name}: ${social.handle} (opens in a new tab)`}
+                class="group inline-flex items-center gap-3 rounded-full border border-zinc-700 bg-zinc-900/60 px-4 py-2 font-mono text-xs text-zinc-300 transition-colors hover:border-emerald-400/60 hover:text-emerald-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-400"
+              >
+                <svg class="h-5 w-5 shrink-0" viewBox={social.viewBox} fill="currentColor" aria-hidden="true">
+                  <path d={social.path} />
+                </svg>
+                <span>{social.handle}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
 
     <div data-aos="fade-up">
