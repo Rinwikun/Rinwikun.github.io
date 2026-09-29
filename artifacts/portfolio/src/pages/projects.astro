@@ -8,7 +8,7 @@ const projects = [
     description: 'A cross-platform desktop app that turns natural-language instructions into terminal actions — reading system info or generating file and folder structures — powered by a local Ollama model.',
     tags: ['.NET 10', 'Avalonia UI', 'Ollama'],
     accent: 'emerald',
-    repoUrl: 'https://github.com/Rinwikun/NoteAITask',
+    repoUrl: 'https://github.com/Rinwikun/NoteAITask', 
   },
   {
     type: 'personal project',
@@ -16,21 +16,21 @@ const projects = [
     description: 'A custom Minecraft launcher with live 3D skin previews, automatic version detection, and one-click launching — no console window, no manual setup.',
     tags: ['Electron', 'Node.js', 'skinview3d'],
     accent: 'indigo',
-    repoUrl: '#', // TODO: ganti dengan URL repo GitHub LauncherMB
+    repoUrl: '#',
   },
 ];
 ---
 
 <BaseLayout
   title="Projects"
-  description="Personal projects and experiments from Rinwikun."
+  description="Personal projects from Rinwikun, mostly started with AI and finished by hand."
 >
   <header class="max-w-2xl" data-aos="fade-up">
     <p class="eyebrow">selected work</p>
-    <h1 class="mt-5 text-5xl font-semibold tracking-tight text-zinc-100 sm:text-6xl">Things I’ve made while learning.</h1>
+    <h1 class="mt-5 text-5xl font-semibold tracking-tight text-zinc-100 sm:text-6xl">Things I've built, mostly with AI doing the first pass.</h1>
     <p class="prose-note mt-6">
-      Each project is a snapshot, not a final answer. I’m interested in what
-      the build taught me and what I’d try differently next time.
+      Each one started as an AI-generated draft. What's here is what I kept,
+      rewrote by hand, and actually understand well enough to explain.
     </p>
   </header>
 
@@ -81,8 +81,7 @@ const projects = [
   >
     <p class="eyebrow">project rule</p>
     <p class="mt-4 max-w-2xl text-xl leading-8 text-zinc-300">
-      Keep the scope small enough to finish, but meaningful enough to teach
-      something new.
+      Let AI write the first draft. Ship nothing I can't explain line by line.
     </p>
   </aside>
 </BaseLayout>

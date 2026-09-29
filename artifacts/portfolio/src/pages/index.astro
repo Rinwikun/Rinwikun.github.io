@@ -8,28 +8,30 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
 <BaseLayout
   title="Home"
-  description="A progressive portfolio and learning log from a Rinwikun."
+  description="Rinwikun's portfolio and learning log — projects that often start with AI, and code I read and edit myself."
 >
   <section class="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
     <div>
-      <p class="eyebrow" data-aos="fade-up">Rinwikun developer · always learning</p>
+      <p class="eyebrow" data-aos="fade-up">Rinwikun · always learning</p>
       <h1
         class="mt-6 max-w-3xl text-5xl font-semibold tracking-tight text-zinc-100 sm:text-7xl"
         data-aos="fade-up"
         data-aos-delay="100"
       >
-        Building things to understand how they work.
+        I let AI start it. I still make it mine.
       </h1>
       <p class="prose-note mt-7" data-aos="fade-up" data-aos-delay="160">
-        I'm Rinwikun, learning by making.. This is where I share the
-        assignments, experiments, and small discoveries that mark the path.
+        I'm Rinwikun. Most of my projects start with an AI writing the first
+        draft — frontend, backend, sometimes the server setup too. But I read
+        the code, edit it by hand, and fix it myself when it breaks. This is
+        where I keep track of what I've built and what I've learned along the way.
       </p>
       <div class="mt-9 flex flex-wrap gap-4" data-aos="fade-up" data-aos-delay="220">
         <a
           href={`${base}projects`}
           class="inline-flex items-center rounded-md bg-emerald-400 px-5 py-3 text-sm font-semibold text-zinc-950 transition-colors hover:bg-emerald-300"
         >
-          See what I’m building
+          See what I'm building
         </a>
         <a
           href={`${base}journey`}
@@ -52,20 +54,20 @@ const base = import.meta.env.BASE_URL.endsWith('/')
       </div>
       <div class="p-6 sm:p-7">
         <p class="font-mono text-xs uppercase tracking-[0.18em] text-emerald-400">
-          ~/Rinwikun-dev/current-focus
+          ~/rinwikun/current-focus
         </p>
         <h2 class="mt-5 text-2xl font-semibold text-zinc-100">
-          From “it works” to “I understand why.”
+          From AI's first draft to something I understand.
         </h2>
         <p class="mt-4 leading-7 text-zinc-400">
-          Right now I’m practicing accessible interfaces, predictable data
-          flows, and writing about the bugs that teach me the most.
+          Right now I'm getting faster at reading AI-generated code — enough
+          to know what to trust, what to rewrite, and what's actually broken.
         </p>
         <div class="mt-7 border-t border-zinc-800 pt-5">
           <p class="font-mono text-xs leading-7 text-zinc-500">
-            <span class="text-indigo-400">$</span> focus --on learning<br />
-            <span class="text-indigo-400">→</span> make a small thing<br />
-            <span class="text-indigo-400">→</span> notice what breaks<br />
+            <span class="text-indigo-400">$</span> ask-ai --scaffold project<br />
+            <span class="text-indigo-400">→</span> read what it wrote<br />
+            <span class="text-indigo-400">→</span> fix what's actually mine to fix<br />
             <span class="text-emerald-400">✓</span> write down the lesson
           </p>
         </div>
@@ -85,8 +87,9 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         </h2>
       </div>
       <p class="max-w-md text-sm leading-7 text-zinc-500">
-        Projects show the outcome. Journey notes show the decisions, failed
-        attempts, and useful fixes behind them.
+        Projects show what got built — often starting from an AI's first
+        pass. Journey notes show what I changed, broke, and figured out
+        along the way.
       </p>
     </div>
   </section>
