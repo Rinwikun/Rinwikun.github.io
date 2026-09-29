@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// GANTI jika repo/branch/path berubah.
+const REPO_OWNER = 'Rinwikun';
+const REPO_NAME = 'Rinwikun.github.io';
+const REPO_BRANCH = 'main';
+const FILE_PATH = 'artifacts/portfolio/src/data/journey.json';
+---
+
+<BaseLayout title="Admin" description="Add a new journey entry.">
+  <section class="mx-auto max-w-2xl" data-aos="fade-up">
+    <p class="eyebrow">private</p>
+    <h1 class="mt-5 text-4xl font-semibold tracking-tight text-zinc-100">
+      Add a journey entry
+    </h1>
+    <p class="prose-note mt-4">
+      Your GitHub token is never saved. It is only kept in memory for this
+      page and is required again every time you open this page.
+    </p>
+
+    <form id="journey-form" class="mt-10 space-y-5">
+      <div>
+        <label for="pat" class="block font-mono text-xs uppercase tracking-[0.14em] text-zinc-500">
+          GitHub token (fine-grained PAT, Contents: Read/Write on this repo)
+        </label>
+        <input
+          id="pat"
+          type="password"
+          autocomplete="off"
+          required
+          class="mt-2 w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-100 outline-none focus:border-emerald-400/60"
+          placeholder="github_pat_..."
+        />
+      </div>
+
+      <div>
+        <label for="date" class="block font-mono text-xs uppercase tracking-[0.14em] text-zinc-500">
+          Date
+        </label>
+        <input
+          id="date"
+          type="text"
+          required
+          placeholder="e.g. 27 September 2026"
+          class="mt-2 w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-100 outline-none focus:border-emerald-400/60"
+        />
+      </div>
+
+      <div>
+        <label for="title" class="block font-mono text-xs uppercase tracking-[0.14em] text-zinc-500">
+          Title
+        </label>
+        <input
+          id="title"
+          type="text"
+          required
+          class="mt-2 w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-100 outline-none focus:border-emerald-400/60"
+        />
+      </div>
+
+      <div>
+        <label for="body" class="block font-mono text-xs uppercase tracking-[0.14em] text-zinc-500">
+          Story
+        </label>
+        <textarea
+          id="body"
+          required
+          rows="5"
+          class="mt-2 w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-100 outline-none focus:border-emerald-400/60"
+        ></textarea>
+      </div>
+
+      <div>
+        <label for="lesson" class="block font-mono text-xs uppercase tracking-[0.14em] text-zinc-500">
+          Lesson (one sentence)
+        </label>
+        <input
+          id="lesson"
+          type="text"
+          required
+          class="mt-2 w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-100 outline-none focus:border-emerald-400/60"
+        />
+      </div>
+
+      <button
+        type="submit"
+        id="submit-btn"
+        class="rounded-full border border-emerald-400/60 bg-emerald-400/10 px-6 py-3 font-mono text-sm text-emerald-300 transition-colors hover:bg-emerald-400/20"
+      >
+        Save to journey.json
+      </button>
+
+      <p id="status" class="font-mono text-sm" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</BaseLayout>
+
+<script is:inline define:vars={{ REPO_OWNER, REPO_NAME, REPO_BRANCH, FILE_PATH }}>
+  // Encode a JS string to base64 safely, including non-ASCII (é, —, ", dst).
+  function utf8ToBase64(str) {
+    const bytes = new TextEncoder().encode(str);
+    let binary = '';
+    bytes.forEach((b) => (binary += String.fromCharCode(b)));
+    return btoa(binary);
+  }
+
+  function base64ToUtf8(b64) {
+    const binary = atob(b64);
+    const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
+    return new TextDecoder().decode(bytes);
+  }
+
+  const form = document.getElementById('journey-form');
+  const statusEl = document.getElementById('status');
+  const submitBtn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const pat = document.getElementById('pat').value.trim();
+    const date = document.getElementById('date').value.trim();
+    const title = document.getElementById('title').value.trim();
+    const body = document.getElementById('body').value.trim();
+    const lesson = document.getElementById('lesson').value.trim();
+
+    if (!pat) {
+      statusEl.textContent = 'GitHub token is required.';
+      statusEl.className = 'font-mono text-sm text-rose-400';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    statusEl.textContent = 'Reading current journey.json…';
+    statusEl.className = 'font-mono text-sm text-zinc-400';
+
+    const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
+    const headers = {
+      Authorization: `Bearer ${pat}`,
+      Accept: 'application/vnd.github+json',
+    };
+
+    try {
+      const getRes = await fetch(`${apiUrl}?ref=${REPO_BRANCH}`, { headers });
+      if (!getRes.ok) {
+        throw new Error(`Failed to read journey.json (HTTP ${getRes.status}). Check the token's permissions.`);
+      }
+      const getData = await getRes.json();
+      const currentEntries = JSON.parse(base64ToUtf8(getData.content));
+
+      const newEntry = { date, title, body, lesson };
+      const updatedEntries = [newEntry, ...currentEntries];
+
+      statusEl.textContent = 'Saving new entry…';
+
+      const putRes = await fetch(apiUrl, {
+        method: 'PUT',
+        headers: { ...headers, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: `Add journey entry: ${title}`,
+          content: utf8ToBase64(JSON.stringify(updatedEntries, null, 2)),
+          sha: getData.sha,
+          branch: REPO_BRANCH,
+        }),
+      });
+
+      if (!putRes.ok) {
+        const err = await putRes.json().catch(() => ({}));
+        throw new Error(err.message || `Failed to save (HTTP ${putRes.status}).`);
+      }
+
+      statusEl.textContent = 'Saved. The site will rebuild automatically in under a minute.';
+      statusEl.className = 'font-mono text-sm text-emerald-400';
+      form.reset();
+    } catch (err) {
+      statusEl.textContent = err.message || 'Something went wrong.';
+      statusEl.className = 'font-mono text-sm text-rose-400';
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>

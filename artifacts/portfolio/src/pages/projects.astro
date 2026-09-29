@@ -8,6 +8,7 @@ const projects = [
     description: 'A cross-platform desktop app that turns natural-language instructions into terminal actions — reading system info or generating file and folder structures — powered by a local Ollama model.',
     tags: ['.NET 10', 'Avalonia UI', 'Ollama'],
     accent: 'emerald',
+    repoUrl: 'https://github.com/Rinwikun/NoteAITask',
   },
   {
     type: 'personal project',
@@ -15,6 +16,7 @@ const projects = [
     description: 'A custom Minecraft launcher with live 3D skin previews, automatic version detection, and one-click launching — no console window, no manual setup.',
     tags: ['Electron', 'Node.js', 'skinview3d'],
     accent: 'indigo',
+    repoUrl: '#', // TODO: ganti dengan URL repo GitHub LauncherMB
   },
 ];
 ---
@@ -35,7 +37,11 @@ const projects = [
   <div class="mt-16 grid gap-5 md:grid-cols-3">
     {
       projects.map((project, index) => (
-        <article
+        <a
+          href={project.repoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${project.title} on GitHub`}
           class="group flex min-h-80 flex-col rounded-lg border border-zinc-800 bg-zinc-900/50 p-6 transition-colors hover:border-zinc-700"
           data-aos="fade-up"
           data-aos-delay={index * 90}
@@ -58,7 +64,13 @@ const projects = [
               <li class="rounded-full border border-zinc-800 px-3 py-1 font-mono text-xs text-zinc-500">{tag}</li>
             ))}
           </ul>
-        </article>
+          <span class="mt-5 inline-flex items-center gap-1.5 font-mono text-xs text-zinc-600 transition-colors group-hover:text-emerald-400">
+            View on GitHub
+            <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M6 3h7v7M13 3L3 13" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </a>
       ))
     }
   </div>

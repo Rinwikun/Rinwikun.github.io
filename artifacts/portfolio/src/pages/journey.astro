@@ -1,32 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const entries = [
-  {
-    date: '16 August 2026',
-    title: 'The pipeline that refused to trigger itself',
-    body: 'A GitHub Actions workflow (verify-build.yml) silently stopped firing after a release finished. The cause was GitHub\'s anti-recursion guard: workflows triggered by the default GITHUB_TOKEN don\'t chain-trigger other workflows on purpose. The fix was consolidating three separate workflows into one release.yml with parallel build-windows and build-linux jobs feeding a single notify job.',
-    lesson: 'A missing trigger is often a safety feature, not a bug.',
-  },
-  {
-    date: '14-15 August 2026',
-    title: 'Four root causes for one settings bug',
-    body: 'A settings-persistence bug in NoteAI Task Terminal took four separate root causes to fully explain: a race condition in model auto-detection, a silently swallowed exception in the save handler, one save button overwriting fields it didn\'t own, and a filesystem race after a file move. The real fix wasn\'t another patch — it was building the saved state from a single in-memory snapshot instead of re-reading the disk mid-save.',
-    lesson: 'When a bug needs a fourth patch, the architecture is the bug.',
-  },
-  {
-    date: '9 January 2026',
-    title: 'The default skin that wouldn\'t stay hidden',
-    body: 'LauncherMB kept flashing the default Steve skin for a split second every time it reopened, and a console window kept appearing behind the game. Fixing the flash meant refactoring the skin-loading order; hiding the console meant launching Minecraft as a detached process. A stray npm dependency conflict (ERESOLVE) also traced back to a library declared in the wrong package.json field entirely.',
-    lesson: 'The visible glitch and the packaging bug are usually the same root cause.',
-  },
-  {
-    date: '7 January 2026',
-    title: 'Three days to build a Minecraft launcher',
-    body: 'Before writing a single line of UI, the first working piece of LauncherMB was scanner.js — a script that finds the .minecraft folder and reads which game versions are actually installed. Everything else, from the 3D skin preview to the launch button, was built on top of that one proven mechanic.',
-    lesson: 'Prove the core mechanic works before designing anything around it.',
-  }
-];
+import entries from '../data/journey.json';
 ---
 
 <BaseLayout
